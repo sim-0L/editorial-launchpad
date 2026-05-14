@@ -50,10 +50,42 @@ function useReveal() {
   return ref;
 }
 
+function ThemeToggle({ light, onToggle }: { light: boolean; onToggle: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={light ? "Activar tema oscuro" : "Activar tema claro"}
+      className="fixed top-5 right-5 md:top-7 md:right-7 z-50 w-11 h-11 md:w-12 md:h-12 border border-nude/60 text-nude bg-noche/40 backdrop-blur-sm flex items-center justify-center hover:bg-coral hover:text-noche hover:border-coral transition-colors duration-500"
+    >
+      {light ? (
+        // Moon
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+        </svg>
+      ) : (
+        // Sun
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 function Index() {
   const ref = useReveal();
+  const [light, setLight] = useState(false);
+  useEffect(() => {
+    const root = document.documentElement;
+    if (light) root.classList.add("light");
+    else root.classList.remove("light");
+    return () => root.classList.remove("light");
+  }, [light]);
   return (
     <main ref={ref} className="bg-noche text-nude font-body overflow-x-hidden">
+      <ThemeToggle light={light} onToggle={() => setLight((v) => !v)} />
       <Hero />
       <Divider />
       <Philosophy />
