@@ -412,8 +412,8 @@ function WhyKaora() {
         <div className="absolute inset-0" style={{ background: "rgba(17,20,43,0.45)" }} />
         <div className="absolute inset-0 flex items-end px-6 md:px-16 pb-8 md:pb-12">
           <p
-            className="font-display italic text-nude max-w-2xl"
-            style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.6rem)" }}
+            className="font-display italic max-w-2xl"
+            style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.6rem)", color: "#E8DDD0" }}
           >
             Cuatro razones. Ningún rodeo.
           </p>
