@@ -69,6 +69,16 @@
   --ring: var(--coral);
 }
 
+/* Light theme — same palette, inverted surfaces */
+.light {
+  --noche: #E8DDD0;        /* bg becomes warm nude */
+  --nude: #11142b;         /* text becomes deep navy */
+  --purpura-azul: #d4c5ae; /* surfaces become a darker nude tone */
+  --border: #c9b89d;
+  --input: #c9b89d;
+  --muted-foreground: #4a4a5a;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
