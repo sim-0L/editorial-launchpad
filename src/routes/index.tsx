@@ -111,9 +111,9 @@ function MarbleFilter() {
   return (
     <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
       <defs>
-        <filter id="marble-turbulence" x="-10%" y="-10%" width="120%" height="120%">
+        <filter id="marble-turbulence" x="-25%" y="-25%" width="150%" height="150%">
           <feTurbulence type="turbulence" baseFrequency="0.015 0.025" numOctaves="4" seed="7" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" />
         </filter>
       </defs>
     </svg>
