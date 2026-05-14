@@ -282,11 +282,9 @@ function ServiceRow({
       />
       <div className="absolute inset-0" style={{ background: "rgba(17,20,43,0.45)" }} />
       <span
-        className="absolute bottom-4 right-6 font-display font-black leading-none select-none"
+        className="marble-text absolute bottom-4 right-6 font-display font-black leading-none select-none"
         style={{
           fontSize: "clamp(6rem, 14vw, 16rem)",
-          color: "var(--coral)",
-          opacity: 0.35,
           letterSpacing: "-0.06em",
         }}
       >
