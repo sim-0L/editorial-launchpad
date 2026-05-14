@@ -389,38 +389,34 @@ function WhyKaora() {
       </div>
 
       <div className="px-6 md:px-16 py-24 md:py-36">
-        <div className="hidden md:grid grid-cols-12 grid-rows-[auto_auto_auto] gap-y-24 relative">
-          <WhyItem
-            num="01"
-            title="Tiempo real"
-            body="Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas."
-            className="col-start-1 col-span-5 row-start-1"
-          />
-          <WhyItem
-            num="02"
-            title="Creatividad con estructura"
-            body="Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos."
-            className="col-start-7 col-span-4 row-start-1 md:row-start-1 md:translate-y-32"
-          />
-          <WhyItem
-            num="03"
-            title="Identidad que impacta"
-            body="Cada proyecto encuentra su voz. Y esa voz, su público."
-            className="col-start-2 col-span-3 row-start-3"
-          />
-          <WhyItem
-            num="04"
-            title="Proyectos que se entregan"
-            body="No vendemos procesos. Entregamos resultados terminados, en fecha."
-            className="col-start-8 col-span-4 row-start-3 -translate-y-10"
-          />
-        </div>
-
-        <div className="md:hidden flex flex-col gap-16">
-          <WhyItem num="01" title="Tiempo real" body="Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas." />
-          <WhyItem num="02" title="Creatividad con estructura" body="Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos." />
-          <WhyItem num="03" title="Identidad que impacta" body="Cada proyecto encuentra su voz. Y esa voz, su público." />
-          <WhyItem num="04" title="Proyectos que se entregan" body="No vendemos procesos. Entregamos resultados terminados, en fecha." />
+        <div className="border-t border-purpura-azul">
+          {[
+            { num: "01", title: "Tiempo real", body: "Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas." },
+            { num: "02", title: "Creatividad con estructura", body: "Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos." },
+            { num: "03", title: "Identidad que impacta", body: "Cada proyecto encuentra su voz. Y esa voz, su público." },
+            { num: "04", title: "Proyectos que se entregan", body: "No vendemos procesos. Entregamos resultados terminados, en fecha." },
+          ].map((item) => (
+            <div
+              key={item.num}
+              className="reveal group grid grid-cols-12 gap-6 md:gap-10 items-baseline border-b border-purpura-azul py-10 md:py-14 transition-colors duration-500 hover:bg-purpura-azul/20"
+            >
+              <div
+                className="col-span-2 md:col-span-2 font-display font-black leading-none text-coral"
+                style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)", letterSpacing: "-0.04em" }}
+              >
+                {item.num}
+              </div>
+              <h4
+                className="col-span-10 md:col-span-5 font-display text-nude leading-[1.05]"
+                style={{ fontSize: "clamp(1.6rem, 3vw, 2.8rem)" }}
+              >
+                {item.title}
+              </h4>
+              <p className="col-start-3 md:col-start-8 col-span-10 md:col-span-5 text-sm md:text-base text-nude/70 leading-relaxed max-w-md">
+                {item.body}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
