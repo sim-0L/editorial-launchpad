@@ -134,8 +134,8 @@ function Hero() {
 
       <div className="relative flex-1 flex items-center justify-center w-full">
         <h1
-          className="marble-text-hero font-display font-black leading-[0.78] tracking-[-0.04em] select-none w-full text-center px-4"
-          style={{ fontSize: "clamp(3.5rem, 21vw, 24rem)" }}
+          className="marble-text-hero font-display font-black leading-[0.85] tracking-[-0.02em] select-none w-full text-center px-6 md:px-10"
+          style={{ fontSize: "clamp(3rem, 18vw, 20rem)" }}
         >
           KAORA
         </h1>
