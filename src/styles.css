@@ -122,3 +122,38 @@
 .reveal.in {
   animation: fadeUp 0.7s ease-out forwards;
 }
+
+/* Marbled gradient text — KAORA palette */
+.marble-text {
+  background: linear-gradient(
+    127deg,
+    #11142b 0%,
+    #27345b 20%,
+    #5e2164 42%,
+    #b61238 68%,
+    #fc696a 85%,
+    #E8DDD0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hero wordmark — richer marble with SVG turbulence filter */
+.marble-text-hero {
+  background: linear-gradient(
+    127deg,
+    #11142b 0%,
+    #27345b 18%,
+    #5e2164 40%,
+    #b61238 65%,
+    #fc696a 85%,
+    #E8DDD0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  filter: url(#marble-turbulence);
+}
