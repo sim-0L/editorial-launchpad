@@ -477,10 +477,10 @@ function Testimonials() {
       {/* Pull quote — 70% width */}
       <div className="reveal mb-24 md:mb-36">
         <blockquote
-          className="font-display font-light text-nude leading-[1.08] tracking-[-0.02em] md:w-[70%]"
+          className="marble-text font-display font-light leading-[1.08] tracking-[-0.02em] md:w-[70%]"
           style={{ fontSize: "clamp(2rem, 4.5vw, 4.8rem)" }}
         >
-          <span className="text-coral">“</span>KAORA no solo entregó el proyecto a tiempo — transformó cómo pensamos nuestra marca desde adentro.<span className="text-coral">”</span>
+          “KAORA no solo entregó el proyecto a tiempo — transformó cómo pensamos nuestra marca desde adentro.”
         </blockquote>
         <hr className="border-0 border-t border-noche/40 mt-10 md:w-[70%]" />
         <div className="mt-4 text-[11px] tracking-[0.3em] uppercase text-nude/70">
