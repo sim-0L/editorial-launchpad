@@ -85,6 +85,7 @@ function Index() {
   }, [light]);
   return (
     <main ref={ref} className="bg-noche text-nude font-body overflow-x-hidden">
+      <MarbleFilter />
       <ThemeToggle light={light} onToggle={() => setLight((v) => !v)} />
       <Hero />
       <Divider />
