@@ -445,7 +445,7 @@ function WhyKaora() {
               className="reveal group grid grid-cols-12 gap-6 md:gap-10 items-baseline border-b border-purpura-azul py-10 md:py-14 transition-colors duration-500 hover:bg-purpura-azul/20"
             >
               <div
-                className="col-span-2 md:col-span-2 font-display font-black leading-none text-coral"
+                className="marble-text col-span-2 md:col-span-2 font-display font-black leading-none"
                 style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)", letterSpacing: "-0.04em" }}
               >
                 {item.num}
