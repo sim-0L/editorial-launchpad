@@ -120,8 +120,8 @@ function Hero() {
 
       <div className="relative flex-1 flex items-center justify-center w-full">
         <h1
-          className="font-display font-black text-nude leading-[0.78] tracking-[-0.04em] select-none w-[120vw] text-center"
-          style={{ fontSize: "clamp(8rem, 28vw, 30rem)" }}
+          className="font-display font-black text-nude leading-[0.78] tracking-[-0.04em] select-none w-full text-center px-4"
+          style={{ fontSize: "clamp(4.5rem, 26vw, 30rem)" }}
         >
           KAORA
         </h1>
