@@ -111,9 +111,9 @@ function MarbleFilter() {
   return (
     <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
       <defs>
-        <filter id="marble-turbulence" x="-10%" y="-10%" width="120%" height="120%">
+        <filter id="marble-turbulence" x="-25%" y="-25%" width="150%" height="150%">
           <feTurbulence type="turbulence" baseFrequency="0.015 0.025" numOctaves="4" seed="7" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" />
         </filter>
       </defs>
     </svg>
@@ -134,8 +134,8 @@ function Hero() {
 
       <div className="relative flex-1 flex items-center justify-center w-full">
         <h1
-          className="marble-text-hero font-display font-black leading-[0.78] tracking-[-0.04em] select-none w-full text-center px-4"
-          style={{ fontSize: "clamp(3.5rem, 21vw, 24rem)" }}
+          className="marble-text-hero font-display font-black leading-[0.85] tracking-[-0.02em] select-none w-full text-center px-6 md:px-10"
+          style={{ fontSize: "clamp(3rem, 18vw, 20rem)" }}
         >
           KAORA
         </h1>
