@@ -107,6 +107,19 @@ function Divider() {
   return <hr className="border-0 border-t border-purpura-azul" />;
 }
 
+function MarbleFilter() {
+  return (
+    <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
+      <defs>
+        <filter id="marble-turbulence" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="turbulence" baseFrequency="0.015 0.025" numOctaves="4" seed="7" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
 function Hero() {
   return (
     <section className="relative min-h-screen w-full bg-noche flex flex-col justify-between overflow-hidden">
