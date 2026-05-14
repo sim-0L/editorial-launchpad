@@ -22,6 +22,11 @@ export const Route = createFileRoute("/")({
   }),
 });
 
+const IMG_SERVICES_1 = "/images/services-1.jpg";
+const IMG_SERVICES_2 = "/images/services-2.jpg";
+const IMG_PHILOSOPHY = "/images/philosophy.jpg";
+const IMG_WHY = "/images/why-kaora.jpg";
+
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -57,6 +62,8 @@ function Index() {
       <Marquee />
       <WhyKaora />
       <Divider />
+      <Testimonials />
+      <Divider />
       <Contact />
       <Footer />
     </main>
@@ -70,7 +77,6 @@ function Divider() {
 function Hero() {
   return (
     <section className="relative min-h-screen w-full bg-noche flex flex-col justify-between overflow-hidden">
-      {/* Top micro labels */}
       <div className="flex justify-between items-start px-6 md:px-12 pt-8 md:pt-10">
         <span className="text-coral text-[10px] md:text-xs tracking-[0.3em] uppercase font-medium">
           — Gestión de Proyectos
@@ -80,7 +86,6 @@ function Hero() {
         </span>
       </div>
 
-      {/* Massive masthead */}
       <div className="relative flex-1 flex items-center justify-center w-full">
         <h1
           className="font-display font-black text-nude leading-[0.78] tracking-[-0.04em] select-none w-[120vw] text-center"
@@ -88,12 +93,9 @@ function Hero() {
         >
           KAORA
         </h1>
-
-        {/* Thin rule at 60% height */}
         <div className="absolute left-0 right-0 top-[60%] h-px bg-purpura-azul" />
       </div>
 
-      {/* Tagline + CTA */}
       <div className="px-6 md:px-12 pb-10 md:pb-14">
         <p className="font-display italic text-nude text-xl md:text-3xl text-center mb-10 md:mb-14">
           Dando vida al presente
@@ -108,7 +110,6 @@ function Hero() {
         </div>
       </div>
 
-      {/* Tiny corner index */}
       <div className="absolute top-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.4em] text-nude/50 uppercase">
         N°01 · MMXXVI
       </div>
@@ -118,9 +119,26 @@ function Hero() {
 
 function Philosophy() {
   return (
-    <section className="bg-purpura-azul">
-      <div className="grid grid-cols-1 md:grid-cols-10 min-h-[80vh]">
-        {/* Left 70% */}
+    <section className="relative">
+      {/* Full-bleed image with dark overlay */}
+      <div className="relative w-full h-[55vh] md:h-[70vh] overflow-hidden">
+        <img
+          src={IMG_PHILOSOPHY}
+          alt="Fundador en estudio nocturno"
+          width={1920}
+          height={1280}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(17,20,43,0.55)" }} />
+        <div className="absolute inset-0 flex items-end px-6 md:px-16 pb-10 md:pb-16">
+          <div className="text-coral text-[10px] tracking-[0.4em] uppercase reveal">
+            — Capítulo I · Origen
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-10 min-h-[80vh] bg-purpura-azul">
         <div className="md:col-span-7 px-6 md:px-16 py-20 md:py-32 flex items-center reveal">
           <blockquote
             className="font-display font-light text-nude leading-[1.05] tracking-[-0.02em]"
@@ -133,15 +151,12 @@ function Philosophy() {
           </blockquote>
         </div>
 
-        {/* Right 30% — dictionary entry */}
         <div className="md:col-span-3 border-t md:border-t-0 md:border-l border-noche/40 px-6 md:px-10 py-14 md:py-32 flex flex-col justify-center gap-12 bg-noche/30">
           <div className="reveal">
             <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-3">
               Entrada 01
             </div>
-            <div className="font-display text-3xl md:text-4xl text-nude mb-2">
-              KA
-            </div>
+            <div className="font-display text-3xl md:text-4xl text-nude mb-2">KA</div>
             <div className="text-[11px] tracking-[0.25em] uppercase text-nude/60 mb-3">
               / Egipcio /
             </div>
@@ -154,9 +169,7 @@ function Philosophy() {
             <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-3">
               Entrada 02
             </div>
-            <div className="font-display text-3xl md:text-4xl text-nude mb-2">
-              ORA
-            </div>
+            <div className="font-display text-3xl md:text-4xl text-nude mb-2">ORA</div>
             <div className="text-[11px] tracking-[0.25em] uppercase text-nude/60 mb-3">
               / Latín /
             </div>
@@ -177,15 +190,23 @@ function ServiceRow({
   body,
   reverse,
   bg,
+  image,
+  imageAlt,
+  imageW,
+  imageH,
 }: {
   number: string;
   title: string;
   body: string;
   reverse?: boolean;
   bg: string;
+  image: string;
+  imageAlt: string;
+  imageW: number;
+  imageH: number;
 }) {
   const text = (
-    <div className="px-6 md:px-16 py-16 md:py-28 flex flex-col justify-center reveal">
+    <div className="px-6 md:px-16 py-16 md:py-28 flex flex-col justify-center reveal relative z-10">
       <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-6">
         Servicio {number}
       </div>
@@ -203,14 +224,23 @@ function ServiceRow({
       </div>
     </div>
   );
-  const numeral = (
-    <div className="flex items-center justify-center md:justify-end px-6 md:px-16 py-10 md:py-28 overflow-hidden">
+  const visual = (
+    <div className="relative overflow-hidden min-h-[50vh] md:min-h-0">
+      <img
+        src={image}
+        alt={imageAlt}
+        width={imageW}
+        height={imageH}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0" style={{ background: "rgba(17,20,43,0.45)" }} />
       <span
-        className="font-display font-black leading-none select-none"
+        className="absolute bottom-4 right-6 font-display font-black leading-none select-none"
         style={{
-          fontSize: "clamp(10rem, 22vw, 24rem)",
+          fontSize: "clamp(6rem, 14vw, 16rem)",
           color: "var(--coral)",
-          opacity: 0.18,
+          opacity: 0.35,
           letterSpacing: "-0.06em",
         }}
       >
@@ -223,13 +253,13 @@ function ServiceRow({
       <div className="grid grid-cols-1 md:grid-cols-2 min-h-[70vh]">
         {reverse ? (
           <>
-            {numeral}
+            {visual}
             {text}
           </>
         ) : (
           <>
             {text}
-            {numeral}
+            {visual}
           </>
         )}
       </div>
@@ -257,6 +287,10 @@ function Services() {
         title="Gestión de Proyectos"
         body="Convertimos ideas dispersas en planes que respiran. Estructura, tiempos, equipos y entregables alineados con la visión —para que el proyecto suceda, no se quede en la conversación."
         bg="bg-noche"
+        image={IMG_SERVICES_1}
+        imageAlt="Profesionales revisando contenido en un laptop"
+        imageW={1280}
+        imageH={1600}
       />
       <Divider />
       <ServiceRow
@@ -265,6 +299,10 @@ function Services() {
         body="Diseñamos narrativas y piezas visuales con voz propia. Identidad, dirección creativa y producción —contenido que se reconoce, recuerda y mueve."
         reverse
         bg="bg-purpura-azul"
+        image={IMG_SERVICES_2}
+        imageAlt="Sesión de planeación con notas y libretas"
+        imageW={1600}
+        imageH={1280}
       />
       <Divider />
     </section>
@@ -300,10 +338,7 @@ function WhyItem({
     <div className={`reveal ${className ?? ""}`}>
       <div
         className="font-display font-black leading-none mb-4"
-        style={{
-          fontSize: "clamp(3rem, 6vw, 6rem)",
-          color: "var(--coral)",
-        }}
+        style={{ fontSize: "clamp(3rem, 6vw, 6rem)", color: "var(--coral)" }}
       >
         {num}
       </div>
@@ -319,8 +354,8 @@ function WhyItem({
 
 function WhyKaora() {
   return (
-    <section className="bg-noche px-6 md:px-16 py-24 md:py-36">
-      <div className="mb-16 md:mb-24">
+    <section className="bg-noche">
+      <div className="px-6 md:px-16 pt-24 md:pt-36 pb-16 md:pb-24">
         <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-3">
           — Capítulo III
         </div>
@@ -332,40 +367,114 @@ function WhyKaora() {
         </h2>
       </div>
 
-      {/* Editorial broken grid — desktop */}
-      <div className="hidden md:grid grid-cols-12 grid-rows-[auto_auto_auto] gap-y-24 relative">
-        <WhyItem
-          num="01"
-          title="Tiempo real"
-          body="Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas."
-          className="col-start-1 col-span-5 row-start-1"
+      {/* Editorial image strip — bleeds to edges */}
+      <div className="relative w-full h-[40vh] md:h-[55vh] overflow-hidden">
+        <img
+          src={IMG_WHY}
+          alt="Lluvia de ideas frente a un mood board"
+          width={1600}
+          height={1280}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <WhyItem
-          num="02"
-          title="Creatividad con estructura"
-          body="Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos."
-          className="col-start-7 col-span-4 row-start-1 md:row-start-1 md:translate-y-32"
-        />
-        <WhyItem
-          num="03"
-          title="Identidad que impacta"
-          body="Cada proyecto encuentra su voz. Y esa voz, su público."
-          className="col-start-2 col-span-3 row-start-3"
-        />
-        <WhyItem
-          num="04"
-          title="Proyectos que se entregan"
-          body="No vendemos procesos. Entregamos resultados terminados, en fecha."
-          className="col-start-8 col-span-4 row-start-3 -translate-y-10"
-        />
+        <div className="absolute inset-0" style={{ background: "rgba(17,20,43,0.45)" }} />
+        <div className="absolute inset-0 flex items-end px-6 md:px-16 pb-8 md:pb-12">
+          <p
+            className="font-display italic text-nude max-w-2xl"
+            style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.6rem)" }}
+          >
+            Cuatro razones. Ningún rodeo.
+          </p>
+        </div>
       </div>
 
-      {/* Mobile stack */}
-      <div className="md:hidden flex flex-col gap-16">
-        <WhyItem num="01" title="Tiempo real" body="Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas." />
-        <WhyItem num="02" title="Creatividad con estructura" body="Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos." />
-        <WhyItem num="03" title="Identidad que impacta" body="Cada proyecto encuentra su voz. Y esa voz, su público." />
-        <WhyItem num="04" title="Proyectos que se entregan" body="No vendemos procesos. Entregamos resultados terminados, en fecha." />
+      <div className="px-6 md:px-16 py-24 md:py-36">
+        <div className="hidden md:grid grid-cols-12 grid-rows-[auto_auto_auto] gap-y-24 relative">
+          <WhyItem
+            num="01"
+            title="Tiempo real"
+            body="Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas."
+            className="col-start-1 col-span-5 row-start-1"
+          />
+          <WhyItem
+            num="02"
+            title="Creatividad con estructura"
+            body="Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos."
+            className="col-start-7 col-span-4 row-start-1 md:row-start-1 md:translate-y-32"
+          />
+          <WhyItem
+            num="03"
+            title="Identidad que impacta"
+            body="Cada proyecto encuentra su voz. Y esa voz, su público."
+            className="col-start-2 col-span-3 row-start-3"
+          />
+          <WhyItem
+            num="04"
+            title="Proyectos que se entregan"
+            body="No vendemos procesos. Entregamos resultados terminados, en fecha."
+            className="col-start-8 col-span-4 row-start-3 -translate-y-10"
+          />
+        </div>
+
+        <div className="md:hidden flex flex-col gap-16">
+          <WhyItem num="01" title="Tiempo real" body="Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas." />
+          <WhyItem num="02" title="Creatividad con estructura" body="Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos." />
+          <WhyItem num="03" title="Identidad que impacta" body="Cada proyecto encuentra su voz. Y esa voz, su público." />
+          <WhyItem num="04" title="Proyectos que se entregan" body="No vendemos procesos. Entregamos resultados terminados, en fecha." />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section className="bg-purpura-azul px-6 md:px-16 py-24 md:py-36">
+      <div className="text-[10px] tracking-[0.4em] uppercase text-nude mb-12 md:mb-20 reveal">
+        — Lo que dicen
+      </div>
+
+      {/* Pull quote — 70% width */}
+      <div className="reveal mb-24 md:mb-36">
+        <blockquote
+          className="font-display font-light text-nude leading-[1.08] tracking-[-0.02em] md:w-[70%]"
+          style={{ fontSize: "clamp(2rem, 4.5vw, 4.8rem)" }}
+        >
+          <span className="text-coral">“</span>KAORA no solo entregó el proyecto a tiempo — transformó cómo pensamos nuestra marca desde adentro.<span className="text-coral">”</span>
+        </blockquote>
+        <hr className="border-0 border-t border-noche/40 mt-10 md:w-[70%]" />
+        <div className="mt-4 text-[11px] tracking-[0.3em] uppercase text-nude/70">
+          Valentina Ríos · Fundadora · Estudio Nómade
+        </div>
+      </div>
+
+      {/* Asymmetric 60/40 */}
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-12 md:gap-20">
+        <div className="md:col-span-6 reveal">
+          <p
+            className="font-display text-nude leading-[1.2] italic"
+            style={{ fontSize: "clamp(1.3rem, 2.2vw, 2.1rem)" }}
+          >
+            “Trabajar con KAORA fue diferente desde el primer día. Entienden que el contenido y la gestión son la misma cosa.”
+          </p>
+          <hr className="border-0 border-t border-noche/40 mt-8" />
+          <div className="mt-4 text-[11px] tracking-[0.3em] uppercase text-nude/70">
+            Mateo Fuentes · Co-fundador · Raíz Digital
+          </div>
+        </div>
+
+        <div className="md:col-span-4 md:pt-24 reveal">
+          <p
+            className="font-display text-nude leading-[1.2] italic"
+            style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.7rem)" }}
+          >
+            “Le dieron vida a una idea que yo solo tenía en mi cabeza. Eso no tiene precio.”
+          </p>
+          <hr className="border-0 border-t border-noche/40 mt-8" />
+          <div className="mt-4 text-[11px] tracking-[0.3em] uppercase text-nude/70">
+            Camila Herrera · Fundadora · Cápsula Studio
+          </div>
+        </div>
       </div>
     </section>
   );
