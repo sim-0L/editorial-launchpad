@@ -125,7 +125,7 @@ function Hero() {
         >
           KAORA
         </h1>
-        <div className="absolute left-0 right-0 top-[60%] h-px bg-purpura-azul" />
+        
       </div>
 
       <div className="px-6 md:px-12 pb-10 md:pb-14">
