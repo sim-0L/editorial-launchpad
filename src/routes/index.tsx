@@ -1,26 +1,448 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "KAORA — Dando vida al presente" },
+      {
+        name: "description",
+        content:
+          "KAORA es un estudio de gestión de proyectos y creación de contenido. Fuerza vital y tiempo, al servicio de ideas que impactan.",
+      },
+      { property: "og:title", content: "KAORA — Dando vida al presente" },
+      {
+        property: "og:description",
+        content:
+          "Estudio de gestión de proyectos y creación de contenido. Identidad que impacta, proyectos que se entregan.",
+      },
+      { property: "og:type", content: "website" },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function useReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+    const els = root.querySelectorAll<HTMLElement>(".reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+function Index() {
+  const ref = useReveal();
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <main ref={ref} className="bg-noche text-nude font-body overflow-x-hidden">
+      <Hero />
+      <Divider />
+      <Philosophy />
+      <Divider />
+      <Services />
+      <Marquee />
+      <WhyKaora />
+      <Divider />
+      <Contact />
+      <Footer />
+    </main>
+  );
+}
+
+function Divider() {
+  return <hr className="border-0 border-t border-purpura-azul" />;
+}
+
+function Hero() {
+  return (
+    <section className="relative min-h-screen w-full bg-noche flex flex-col justify-between overflow-hidden">
+      {/* Top micro labels */}
+      <div className="flex justify-between items-start px-6 md:px-12 pt-8 md:pt-10">
+        <span className="text-coral text-[10px] md:text-xs tracking-[0.3em] uppercase font-medium">
+          — Gestión de Proyectos
+        </span>
+        <span className="text-coral text-[10px] md:text-xs tracking-[0.3em] uppercase font-medium text-right">
+          Creación de Contenido —
+        </span>
+      </div>
+
+      {/* Massive masthead */}
+      <div className="relative flex-1 flex items-center justify-center w-full">
+        <h1
+          className="font-display font-black text-nude leading-[0.78] tracking-[-0.04em] select-none w-[120vw] text-center"
+          style={{ fontSize: "clamp(8rem, 28vw, 30rem)" }}
+        >
+          KAORA
+        </h1>
+
+        {/* Thin rule at 60% height */}
+        <div className="absolute left-0 right-0 top-[60%] h-px bg-purpura-azul" />
+      </div>
+
+      {/* Tagline + CTA */}
+      <div className="px-6 md:px-12 pb-10 md:pb-14">
+        <p className="font-display italic text-nude text-xl md:text-3xl text-center mb-10 md:mb-14">
+          Dando vida al presente
+        </p>
+        <div className="flex justify-center">
+          <a
+            href="#contacto"
+            className="border border-nude text-nude px-8 md:px-12 py-3 md:py-4 text-xs md:text-sm tracking-[0.35em] uppercase hover:bg-nude hover:text-noche transition-colors duration-500"
+          >
+            Conoce KAORA
+          </a>
+        </div>
+      </div>
+
+      {/* Tiny corner index */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.4em] text-nude/50 uppercase">
+        N°01 · MMXXVI
+      </div>
+    </section>
+  );
+}
+
+function Philosophy() {
+  return (
+    <section className="bg-purpura-azul">
+      <div className="grid grid-cols-1 md:grid-cols-10 min-h-[80vh]">
+        {/* Left 70% */}
+        <div className="md:col-span-7 px-6 md:px-16 py-20 md:py-32 flex items-center reveal">
+          <blockquote
+            className="font-display font-light text-nude leading-[1.05] tracking-[-0.02em]"
+            style={{ fontSize: "clamp(2.2rem, 5.2vw, 5.5rem)" }}
+          >
+            <span className="text-coral italic">KA</span>, la fuerza vital
+            que da vida al contenido.{" "}
+            <span className="text-coral italic">ORA</span>, el tiempo que lo
+            hace posible.
+          </blockquote>
+        </div>
+
+        {/* Right 30% — dictionary entry */}
+        <div className="md:col-span-3 border-t md:border-t-0 md:border-l border-noche/40 px-6 md:px-10 py-14 md:py-32 flex flex-col justify-center gap-12 bg-noche/30">
+          <div className="reveal">
+            <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-3">
+              Entrada 01
+            </div>
+            <div className="font-display text-3xl md:text-4xl text-nude mb-2">
+              KA
+            </div>
+            <div className="text-[11px] tracking-[0.25em] uppercase text-nude/60 mb-3">
+              / Egipcio /
+            </div>
+            <p className="text-sm text-nude/80 leading-relaxed">
+              Fuerza vital. La energía espiritual que anima al ser y sostiene
+              toda creación.
+            </p>
+          </div>
+          <div className="reveal">
+            <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-3">
+              Entrada 02
+            </div>
+            <div className="font-display text-3xl md:text-4xl text-nude mb-2">
+              ORA
+            </div>
+            <div className="text-[11px] tracking-[0.25em] uppercase text-nude/60 mb-3">
+              / Latín /
+            </div>
+            <p className="text-sm text-nude/80 leading-relaxed">
+              El tiempo. La hora presente, el instante que se entrega y no
+              vuelve.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServiceRow({
+  number,
+  title,
+  body,
+  reverse,
+  bg,
+}: {
+  number: string;
+  title: string;
+  body: string;
+  reverse?: boolean;
+  bg: string;
+}) {
+  const text = (
+    <div className="px-6 md:px-16 py-16 md:py-28 flex flex-col justify-center reveal">
+      <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-6">
+        Servicio {number}
+      </div>
+      <h3
+        className="font-display font-bold text-nude leading-[0.95] mb-8"
+        style={{ fontSize: "clamp(2.2rem, 4.5vw, 4.5rem)" }}
+      >
+        {title}
+      </h3>
+      <p className="max-w-md text-base md:text-lg text-nude/75 leading-relaxed font-light">
+        {body}
+      </p>
+      <div className="mt-10 text-coral text-sm tracking-[0.3em] uppercase">
+        Ver más →
+      </div>
+    </div>
+  );
+  const numeral = (
+    <div className="flex items-center justify-center md:justify-end px-6 md:px-16 py-10 md:py-28 overflow-hidden">
+      <span
+        className="font-display font-black leading-none select-none"
+        style={{
+          fontSize: "clamp(10rem, 22vw, 24rem)",
+          color: "var(--coral)",
+          opacity: 0.18,
+          letterSpacing: "-0.06em",
+        }}
+      >
+        {number}
+      </span>
+    </div>
+  );
+  return (
+    <div className={bg}>
+      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[70vh]">
+        {reverse ? (
+          <>
+            {numeral}
+            {text}
+          </>
+        ) : (
+          <>
+            {text}
+            {numeral}
+          </>
+        )}
+      </div>
     </div>
   );
 }
 
-function Index() {
-  return <PlaceholderIndex />;
+function Services() {
+  return (
+    <section>
+      <div className="px-6 md:px-16 pt-20 pb-10 bg-noche">
+        <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-3">
+          — Capítulo II
+        </div>
+        <h2
+          className="font-display italic text-nude"
+          style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.2rem)" }}
+        >
+          Lo que hacemos
+        </h2>
+      </div>
+      <Divider />
+      <ServiceRow
+        number="01"
+        title="Gestión de Proyectos"
+        body="Convertimos ideas dispersas en planes que respiran. Estructura, tiempos, equipos y entregables alineados con la visión —para que el proyecto suceda, no se quede en la conversación."
+        bg="bg-noche"
+      />
+      <Divider />
+      <ServiceRow
+        number="02"
+        title="Creación de Contenido"
+        body="Diseñamos narrativas y piezas visuales con voz propia. Identidad, dirección creativa y producción —contenido que se reconoce, recuerda y mueve."
+        reverse
+        bg="bg-purpura-azul"
+      />
+      <Divider />
+    </section>
+  );
+}
+
+function Marquee() {
+  const phrase =
+    "KAORA · Dando vida al presente · Gestión · Contenido · Presente · ";
+  const repeated = phrase.repeat(8);
+  return (
+    <div className="bg-magenta py-6 md:py-8 overflow-hidden border-y border-noche/20">
+      <div className="marquee-track font-display text-nude text-3xl md:text-5xl tracking-tight">
+        <span className="pr-8">{repeated}</span>
+        <span className="pr-8">{repeated}</span>
+      </div>
+    </div>
+  );
+}
+
+function WhyItem({
+  num,
+  title,
+  body,
+  className,
+}: {
+  num: string;
+  title: string;
+  body: string;
+  className?: string;
+}) {
+  return (
+    <div className={`reveal ${className ?? ""}`}>
+      <div
+        className="font-display font-black leading-none mb-4"
+        style={{
+          fontSize: "clamp(3rem, 6vw, 6rem)",
+          color: "var(--coral)",
+        }}
+      >
+        {num}
+      </div>
+      <h4 className="font-display text-2xl md:text-3xl text-nude mb-3 leading-tight">
+        {title}
+      </h4>
+      <p className="text-sm md:text-base text-nude/70 max-w-xs leading-relaxed">
+        {body}
+      </p>
+    </div>
+  );
+}
+
+function WhyKaora() {
+  return (
+    <section className="bg-noche px-6 md:px-16 py-24 md:py-36">
+      <div className="mb-16 md:mb-24">
+        <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-3">
+          — Capítulo III
+        </div>
+        <h2
+          className="font-display italic text-nude"
+          style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.2rem)" }}
+        >
+          Por qué KAORA
+        </h2>
+      </div>
+
+      {/* Editorial broken grid — desktop */}
+      <div className="hidden md:grid grid-cols-12 grid-rows-[auto_auto_auto] gap-y-24 relative">
+        <WhyItem
+          num="01"
+          title="Tiempo real"
+          body="Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas."
+          className="col-start-1 col-span-5 row-start-1"
+        />
+        <WhyItem
+          num="02"
+          title="Creatividad con estructura"
+          body="Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos."
+          className="col-start-7 col-span-4 row-start-1 md:row-start-1 md:translate-y-32"
+        />
+        <WhyItem
+          num="03"
+          title="Identidad que impacta"
+          body="Cada proyecto encuentra su voz. Y esa voz, su público."
+          className="col-start-2 col-span-3 row-start-3"
+        />
+        <WhyItem
+          num="04"
+          title="Proyectos que se entregan"
+          body="No vendemos procesos. Entregamos resultados terminados, en fecha."
+          className="col-start-8 col-span-4 row-start-3 -translate-y-10"
+        />
+      </div>
+
+      {/* Mobile stack */}
+      <div className="md:hidden flex flex-col gap-16">
+        <WhyItem num="01" title="Tiempo real" body="Trabajamos en el presente, con ritmo y respuestas claras. Sin promesas vagas." />
+        <WhyItem num="02" title="Creatividad con estructura" body="Lo intuitivo se sostiene en método. Diseño y planeación caminan juntos." />
+        <WhyItem num="03" title="Identidad que impacta" body="Cada proyecto encuentra su voz. Y esa voz, su público." />
+        <WhyItem num="04" title="Proyectos que se entregan" body="No vendemos procesos. Entregamos resultados terminados, en fecha." />
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section
+      id="contacto"
+      className="bg-noche min-h-screen flex flex-col items-center justify-center px-6 md:px-16 py-24 text-center"
+    >
+      <div className="text-[10px] tracking-[0.4em] uppercase text-coral mb-8 reveal">
+        — Capítulo IV
+      </div>
+      <h2
+        className="font-display font-bold text-nude leading-[0.95] mb-6 reveal"
+        style={{ fontSize: "clamp(3rem, 8vw, 8rem)" }}
+      >
+        ¿Tienes un proyecto?
+      </h2>
+      <p
+        className="font-display italic text-coral mb-16 reveal"
+        style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
+      >
+        Conversemos.
+      </p>
+
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="w-full max-w-2xl flex flex-col gap-6 reveal"
+      >
+        <div className="flex flex-col md:flex-row gap-6">
+          <input
+            type="text"
+            placeholder="Tu nombre"
+            className="flex-1 bg-transparent border-0 border-b border-nude/40 px-0 py-4 text-nude placeholder:text-nude/40 focus:outline-none focus:border-coral transition-colors text-lg"
+          />
+          <input
+            type="email"
+            placeholder="Tu correo"
+            className="flex-1 bg-transparent border-0 border-b border-nude/40 px-0 py-4 text-nude placeholder:text-nude/40 focus:outline-none focus:border-coral transition-colors text-lg"
+          />
+        </div>
+        <div className="pt-6">
+          <button
+            type="submit"
+            className="bg-coral text-noche px-10 py-4 text-xs tracking-[0.35em] uppercase font-medium hover:bg-nude transition-colors duration-500"
+          >
+            Escribir a KAORA →
+          </button>
+        </div>
+      </form>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="bg-noche border-t border-purpura-azul px-6 md:px-16 py-14">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <div>
+          <div className="font-display font-black text-nude text-3xl md:text-4xl tracking-tight leading-none">
+            KAORA
+          </div>
+          <div className="text-[11px] tracking-[0.3em] uppercase text-nude/50 mt-2 italic font-display">
+            Dando vida al presente
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-6 md:gap-12 text-[11px] tracking-[0.3em] uppercase text-nude/60">
+          <span>Instagram —</span>
+          <span>Behance —</span>
+          <span>hola@kaora.studio</span>
+        </div>
+        <div className="text-[10px] tracking-[0.3em] uppercase text-nude/40">
+          © MMXXVI · Estudio
+        </div>
+      </div>
+    </footer>
+  );
 }
