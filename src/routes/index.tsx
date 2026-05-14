@@ -85,6 +85,7 @@ function Index() {
   }, [light]);
   return (
     <main ref={ref} className="bg-noche text-nude font-body overflow-x-hidden">
+      <MarbleFilter />
       <ThemeToggle light={light} onToggle={() => setLight((v) => !v)} />
       <Hero />
       <Divider />
@@ -106,6 +107,19 @@ function Divider() {
   return <hr className="border-0 border-t border-purpura-azul" />;
 }
 
+function MarbleFilter() {
+  return (
+    <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
+      <defs>
+        <filter id="marble-turbulence" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="turbulence" baseFrequency="0.015 0.025" numOctaves="4" seed="7" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
 function Hero() {
   return (
     <section className="relative min-h-screen w-full bg-noche flex flex-col justify-between overflow-hidden">
@@ -120,7 +134,7 @@ function Hero() {
 
       <div className="relative flex-1 flex items-center justify-center w-full">
         <h1
-          className="font-display font-black text-nude leading-[0.78] tracking-[-0.04em] select-none w-full text-center px-4"
+          className="marble-text-hero font-display font-black leading-[0.78] tracking-[-0.04em] select-none w-full text-center px-4"
           style={{ fontSize: "clamp(4.5rem, 26vw, 30rem)" }}
         >
           KAORA
@@ -268,11 +282,9 @@ function ServiceRow({
       />
       <div className="absolute inset-0" style={{ background: "rgba(17,20,43,0.45)" }} />
       <span
-        className="absolute bottom-4 right-6 font-display font-black leading-none select-none"
+        className="marble-text absolute bottom-4 right-6 font-display font-black leading-none select-none"
         style={{
           fontSize: "clamp(6rem, 14vw, 16rem)",
-          color: "var(--coral)",
-          opacity: 0.35,
           letterSpacing: "-0.06em",
         }}
       >
@@ -433,7 +445,7 @@ function WhyKaora() {
               className="reveal group grid grid-cols-12 gap-6 md:gap-10 items-baseline border-b border-purpura-azul py-10 md:py-14 transition-colors duration-500 hover:bg-purpura-azul/20"
             >
               <div
-                className="col-span-2 md:col-span-2 font-display font-black leading-none text-coral"
+                className="marble-text col-span-2 md:col-span-2 font-display font-black leading-none"
                 style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)", letterSpacing: "-0.04em" }}
               >
                 {item.num}
@@ -465,10 +477,10 @@ function Testimonials() {
       {/* Pull quote — 70% width */}
       <div className="reveal mb-24 md:mb-36">
         <blockquote
-          className="font-display font-light text-nude leading-[1.08] tracking-[-0.02em] md:w-[70%]"
+          className="marble-text font-display font-light leading-[1.08] tracking-[-0.02em] md:w-[70%]"
           style={{ fontSize: "clamp(2rem, 4.5vw, 4.8rem)" }}
         >
-          <span className="text-coral">“</span>KAORA no solo entregó el proyecto a tiempo — transformó cómo pensamos nuestra marca desde adentro.<span className="text-coral">”</span>
+          “KAORA no solo entregó el proyecto a tiempo — transformó cómo pensamos nuestra marca desde adentro.”
         </blockquote>
         <hr className="border-0 border-t border-noche/40 mt-10 md:w-[70%]" />
         <div className="mt-4 text-[11px] tracking-[0.3em] uppercase text-nude/70">

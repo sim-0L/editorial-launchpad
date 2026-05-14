@@ -1,7 +1,15 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,900&family=DM+Sans:wght@200;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500;700&display=swap');
+
+@font-face {
+  font-family: 'Brasika';
+  src: url('/fonts/brasika-display-trial.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -35,7 +43,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-display: 'Playfair Display', serif;
+  --font-display: 'Brasika', 'Georgia', serif;
   --font-body: 'DM Sans', sans-serif;
 }
 
@@ -113,4 +121,39 @@
 }
 .reveal.in {
   animation: fadeUp 0.7s ease-out forwards;
+}
+
+/* Marbled gradient text — KAORA palette */
+.marble-text {
+  background: linear-gradient(
+    127deg,
+    #11142b 0%,
+    #27345b 20%,
+    #5e2164 42%,
+    #b61238 68%,
+    #fc696a 85%,
+    #E8DDD0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hero wordmark — richer marble with SVG turbulence filter */
+.marble-text-hero {
+  background: linear-gradient(
+    127deg,
+    #11142b 0%,
+    #27345b 18%,
+    #5e2164 40%,
+    #b61238 65%,
+    #fc696a 85%,
+    #E8DDD0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  filter: url(#marble-turbulence);
 }
