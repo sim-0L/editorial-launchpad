@@ -129,9 +129,14 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  display: inline-block;
+  line-height: 1;
+  padding: 0.08em 0.06em 0.12em;
+  overflow: visible;
+  text-rendering: geometricPrecision;
 }
 
-/* Hero wordmark — marble with SVG turbulence filter, palette tuned for dark bg */
+/* Hero wordmark — marble gradient without distortion for stable glyph rendering */
 .marble-text-hero {
   background: linear-gradient(
     127deg,
@@ -145,7 +150,11 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  filter: url(#marble-turbulence);
+  display: inline-block;
+  line-height: 1;
+  padding: 0.1em 0.08em 0.14em;
+  overflow: visible;
+  text-rendering: geometricPrecision;
 }
 
 /* Light theme — invert direction so dark tones land on light background */

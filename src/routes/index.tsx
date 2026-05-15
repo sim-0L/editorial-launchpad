@@ -85,7 +85,6 @@ function Index() {
   }, [light]);
   return (
     <main ref={ref} className="bg-noche text-nude font-body overflow-x-hidden">
-      <MarbleFilter />
       <ThemeToggle light={light} onToggle={() => setLight((v) => !v)} />
       <Hero />
       <Divider />
@@ -107,19 +106,6 @@ function Divider() {
   return <hr className="border-0 border-t border-purpura-azul" />;
 }
 
-function MarbleFilter() {
-  return (
-    <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
-      <defs>
-        <filter id="marble-turbulence" x="-25%" y="-25%" width="150%" height="150%">
-          <feTurbulence type="turbulence" baseFrequency="0.015 0.025" numOctaves="4" seed="7" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </defs>
-    </svg>
-  );
-}
-
 function Hero() {
   return (
     <section className="relative min-h-screen w-full bg-noche flex flex-col justify-between overflow-hidden">
@@ -134,8 +120,8 @@ function Hero() {
 
       <div className="relative flex-1 flex items-center justify-center w-full">
         <h1
-          className="marble-text-hero font-display font-black leading-[0.85] tracking-[-0.02em] select-none w-full text-center px-6 md:px-10"
-          style={{ fontSize: "clamp(3rem, 18vw, 20rem)" }}
+          className="marble-text-hero font-display font-black leading-[0.96] tracking-[0.01em] select-none w-full text-center px-8 md:px-12"
+          style={{ fontSize: "clamp(2.85rem, 17vw, 18rem)" }}
         >
           KAORA
         </h1>
@@ -282,10 +268,10 @@ function ServiceRow({
       />
       <div className="absolute inset-0" style={{ background: "rgba(17,20,43,0.45)" }} />
       <span
-        className="marble-text absolute bottom-4 right-6 font-display font-black leading-none select-none"
+        className="marble-text absolute bottom-4 right-6 font-display font-black leading-[0.95] select-none"
         style={{
-          fontSize: "clamp(6rem, 14vw, 16rem)",
-          letterSpacing: "-0.06em",
+          fontSize: "clamp(5.6rem, 13vw, 15rem)",
+          letterSpacing: "-0.02em",
         }}
       >
         {number}
@@ -445,8 +431,8 @@ function WhyKaora() {
               className="reveal group grid grid-cols-12 gap-6 md:gap-10 items-baseline border-b border-purpura-azul py-10 md:py-14 transition-colors duration-500 hover:bg-purpura-azul/20"
             >
               <div
-                className="marble-text col-span-2 md:col-span-2 font-display font-black leading-none"
-                style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)", letterSpacing: "-0.04em" }}
+                className="marble-text col-span-2 md:col-span-2 font-display font-black leading-[0.95]"
+                style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)", letterSpacing: "-0.01em" }}
               >
                 {item.num}
               </div>
